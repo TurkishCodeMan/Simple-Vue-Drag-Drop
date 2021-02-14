@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-3">
     <h2 class="text-center text-primary">Drag & Drop</h2>
-    <div class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="d-flex justify-content-center align-items-center">
       <div class="col-md-4">
         <div class="p-2 alert alert-secondary">
           <h3>BackLog</h3>
@@ -10,7 +10,9 @@
             class="list-group"
             :list="arrLog"
             group="tasks"
+            tag="div"
             draggable=".list-group-item"
+                :bind="dragOptions"
           >
             <transition-group
               enter-active-class="animated bounce"
@@ -36,7 +38,7 @@
             :list="arrTest"
             group="tasks"
             draggable=".list-group-item"
-            ghost-closs="deneme"
+            :bind="dragOptions"
           >
             <transition-group
               enter-active-class="animated bounce"
@@ -62,6 +64,7 @@
             :list="arrFinished"
             group="tasks"
             draggable=".list-group-item"
+                :bind="dragOptions"
           >
             <div
               class="list-group-item"
@@ -93,6 +96,15 @@ export default {
       drag: "",
     };
   },
+  computed:{
+    dragOptions(){
+      return {
+        animation:0,
+        ghostClass:'ghost',
+        disabled:false
+      }
+    }
+  },
   components: {
     draggable,
   },
@@ -105,8 +117,8 @@ export default {
 
 }
 
-.deneme{
-    background: rebeccapurple;
+.ghost {
+  opacity: 0.5;
+  background: #c8ebfb;
 }
-
 </style>
